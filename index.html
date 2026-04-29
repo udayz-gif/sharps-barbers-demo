@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sharps & Co. — Barbers, Slough</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0e0d0b;
+  --bg-2: #16140f;
+  --cream: #f4ede0;
+  --paper: #ebe2d0;
+  --gold: #c9a96a;
+  --gold-2: #b08d4f;
+  --rust: #8a3a1f;
+  --line: rgba(244, 237, 224, 0.12);
+  --muted: rgba(244, 237, 224, 0.6);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 400;
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.93 0 0 0 0 0.88 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+}
+
+.serif {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
+}
+
+/* ============ NAV ============ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.25rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(8px);
+  background: rgba(14, 13, 11, 0.75);
+  border-bottom: 1px solid var(--line);
+}
+.logo {
+  font-family: 'Fraunces', serif;
+  font-weight: 800;
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.logo-mark {
+  width: 28px; height: 28px;
+  border: 1.5px solid var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: var(--gold);
+  font-style: italic;
+}
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.nav-links a {
+  color: var(--cream);
+  text-decoration: none;
+  opacity: 0.75;
+  transition: opacity 0.3s;
+  position: relative;
+}
+.nav-links a:hover { opacity: 1; }
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.3s;
+}
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  background: var(--gold);
+  color: var(--bg);
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+.nav-cta:hover {
+  background: var(--cream);
+  transform: translateY(-1px);
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  nav { padding: 1rem 1.25rem; }
+}
+
+/* ============ HERO ============ */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 6rem 2.5rem 4rem;
+  overflow: hidden;
+  z-index: 2;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(201, 169, 106, 0.18), transparent 50%),
+    radial-gradient(ellipse at 10% 90%, rgba(138, 58, 31, 0.15), transparent 50%),
+    var(--bg);
+  z-index: -1;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 4rem;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  align-items: center;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s forwards;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 30px; height: 1px;
+  background: var(--gold);
+}
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 1s 0.4s forwards;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold);
+  font-weight: 400;
+}
+.hero-sub {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 480px;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeUp 1s 0.6s forwards;
+}
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 1s 0.8s forwards;
+}
+.btn-primary, .btn-ghost {
+  padding: 1rem 1.8rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+.btn-primary {
+  background: var(--cream);
+  color: var(--bg);
+}
+.btn-primary:hover {
+  background: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -10px rgba(201, 169, 106, 0.6);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--cream);
+  border: 1px solid var(--line);
+}
+.btn-ghost:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* hero visual */
+.hero-visual {
+  position: relative;
+  aspect-ratio: 4/5;
+  opacity: 0;
+  animation: fadeIn 1.2s 0.6s forwards;
+}
+.barber-pole {
+  position: absolute;
+  inset: 0;
+  border-radius: 220px 220px 30px 30px;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      var(--cream) 0 18px,
+      var(--rust) 18px 36px,
+      var(--bg) 36px 54px,
+      var(--cream) 54px 72px
+    );
+  box-shadow:
+    inset 0 0 60px rgba(0,0,0,0.5),
+    0 30px 80px -20px rgba(0,0,0,0.6);
+  animation: stripeMove 8s linear infinite;
+}
+@keyframes stripeMove {
+  to { background-position: 0 -200px; }
+}
+.barber-pole::before, .barber-pole::after {
+  content: '';
+  position: absolute;
+  left: -10%; right: -10%;
+  height: 14%;
+  background: linear-gradient(180deg, var(--gold) 0%, var(--gold-2) 100%);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+.barber-pole::before { top: 8%; border-radius: 8px; }
+.barber-pole::after { bottom: 4%; border-radius: 8px; }
+.pole-cap {
+  position: absolute;
+  top: -3%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 35%;
+  height: 12%;
+  background: linear-gradient(180deg, var(--gold) 0%, var(--gold-2) 100%);
+  border-radius: 50% 50% 0 0;
+  z-index: 2;
+}
+.float-tag {
+  position: absolute;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  backdrop-filter: blur(10px);
+  z-index: 3;
+}
+.float-tag-1 {
+  top: 15%; left: -12%;
+  animation: float 4s ease-in-out infinite;
+}
+.float-tag-2 {
+  bottom: 18%; right: -10%;
+  animation: float 4s ease-in-out infinite 2s;
+}
+.float-tag .stars { color: var(--gold); font-size: 0.75rem; letter-spacing: 0.1em; }
+.float-tag .small { font-size: 0.7rem; color: var(--muted); margin-top: 0.2rem; }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .hero-visual { max-width: 320px; margin: 0 auto; }
+}
+
+/* ============ MARQUEE ============ */
+.marquee {
+  position: relative;
+  z-index: 2;
+  background: var(--bg-2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  padding: 1.8rem 0;
+}
+.marquee-track {
+  display: flex;
+  gap: 4rem;
+  white-space: nowrap;
+  animation: scroll 40s linear infinite;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.5rem;
+  color: var(--cream);
+}
+.marquee-track span {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+.marquee-track .dot {
+  color: var(--gold);
+  font-size: 1.8rem;
+}
+@keyframes scroll {
+  to { transform: translateX(-50%); }
+}
+
+/* ============ SERVICES ============ */
+.services {
+  padding: 8rem 2.5rem;
+  position: relative;
+  z-index: 2;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+.section-head {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 4rem;
+  margin-bottom: 5rem;
+  align-items: end;
+}
+.section-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+.section-head h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.section-head h2 em { font-style: italic; color: var(--gold); }
+.section-head p {
+  color: var(--muted);
+  font-size: 1.05rem;
+  max-width: 480px;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.service {
+  padding: 3rem;
+  background: var(--bg);
+  position: relative;
+  transition: background 0.4s;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.5rem;
+  align-items: start;
+}
+.service:hover { background: var(--bg-2); }
+.service-num {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: var(--gold);
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+.service h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 1.7rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+.service p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+.service-meta {
+  font-size: 0.8rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.service-price {
+  font-family: 'Fraunces', serif;
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--gold);
+}
+
+@media (max-width: 768px) {
+  .section-head { grid-template-columns: 1fr; gap: 1.5rem; }
+  .service-grid { grid-template-columns: 1fr; }
+  .service { padding: 2rem 1.5rem; grid-template-columns: auto 1fr; }
+  .service-price { grid-column: 1 / -1; }
+}
+
+/* ============ ABOUT/CRAFT ============ */
+.craft {
+  padding: 8rem 2.5rem;
+  position: relative;
+  z-index: 2;
+  background: var(--bg-2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.craft-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+.craft-visual {
+  position: relative;
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, var(--bg) 0%, var(--bg-2) 100%);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.craft-visual::before {
+  content: 'EST. 2014';
+  position: absolute;
+  top: 1.5rem; left: 1.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+}
+.craft-visual::after {
+  content: 'SLOUGH';
+  position: absolute;
+  bottom: 1.5rem; right: 1.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+}
+.scissors-svg {
+  width: 60%;
+  height: auto;
+  opacity: 0.9;
+}
+.craft h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(2.5rem, 4.5vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+}
+.craft h2 em { font-style: italic; color: var(--gold); }
+.craft .body-text {
+  color: var(--muted);
+  font-size: 1.05rem;
+  margin-bottom: 1.5rem;
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--line);
+}
+.stat-num {
+  font-family: 'Fraunces', serif;
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--gold);
+  letter-spacing: -0.02em;
+}
+.stat-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.3rem;
+}
+
+@media (max-width: 900px) {
+  .craft-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .stats { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+}
+
+/* ============ TESTIMONIALS ============ */
+.reviews {
+  padding: 8rem 2.5rem;
+  position: relative;
+  z-index: 2;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.review {
+  padding: 2.5rem;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  position: relative;
+  transition: transform 0.4s, border-color 0.4s;
+}
+.review:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold);
+}
+.review-stars {
+  color: var(--gold);
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 1.5rem;
+}
+.review-text {
+  font-family: 'Fraunces', serif;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+.review-author {
+  font-size: 0.85rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+.review-author strong {
+  color: var(--cream);
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+@media (max-width: 768px) {
+  .review-grid { grid-template-columns: 1fr; }
+}
+
+/* ============ BOOKING CTA ============ */
+.book {
+  padding: 8rem 2.5rem;
+  position: relative;
+  z-index: 2;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(201, 169, 106, 0.15), transparent 70%),
+    var(--bg-2);
+  border-top: 1px solid var(--line);
+  text-align: center;
+  overflow: hidden;
+}
+.book::before {
+  content: 'BOOK · BOOK · BOOK ·';
+  position: absolute;
+  top: 2rem; left: 0; right: 0;
+  text-align: center;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 0.8rem;
+  letter-spacing: 0.5em;
+  color: var(--gold);
+  opacity: 0.5;
+}
+.book h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.book h2 em { font-style: italic; color: var(--gold); }
+.book p {
+  color: var(--muted);
+  font-size: 1.1rem;
+  max-width: 500px;
+  margin: 0 auto 3rem;
+}
+.book-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  max-width: 800px;
+  margin: 4rem auto 0;
+  padding-top: 3rem;
+  border-top: 1px solid var(--line);
+  text-align: left;
+}
+.info-block-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.7rem;
+}
+.info-block-text {
+  font-family: 'Fraunces', serif;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+@media (max-width: 768px) {
+  .book-info { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+}
+
+/* ============ FOOTER ============ */
+footer {
+  padding: 4rem 2.5rem 2rem;
+  background: var(--bg);
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid var(--line);
+}
+.footer-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+.footer-brand .logo { margin-bottom: 1rem; }
+.footer-brand p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  max-width: 320px;
+}
+.footer-col h4 {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+}
+.footer-col ul {
+  list-style: none;
+}
+.footer-col li {
+  margin-bottom: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.footer-col a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-col a:hover { color: var(--gold); }
+.footer-bottom {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+@media (max-width: 768px) {
+  .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s, transform 0.8s;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <div class="logo-mark">S</div>
+    Sharps <em class="serif" style="font-style: italic; color: var(--gold); font-weight: 400;">&amp; Co.</em>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#craft">The Craft</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#book">Visit</a></li>
+  </ul>
+  <a href="#book" class="nav-cta">Book Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid">
+    <div>
+      <div class="hero-eyebrow">Slough · Est. 2014</div>
+      <h1>The art of the<br><em>proper</em> haircut.</h1>
+      <p class="hero-sub">Traditional barbering, modern finish. Hot towel shaves, sharp fades, beard sculpting — done by hand, never rushed.</p>
+      <div class="hero-cta">
+        <a href="#book" class="btn-primary">Book a chair →</a>
+        <a href="#services" class="btn-ghost">See services</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="barber-pole">
+        <div class="pole-cap"></div>
+      </div>
+      <div class="float-tag float-tag-1">
+        <div class="stars">★★★★★</div>
+        <div class="small">412 Google reviews</div>
+      </div>
+      <div class="float-tag float-tag-2">
+        <div style="font-family: 'Fraunces', serif; font-style: italic; font-size: 1rem;">Walk-ins welcome</div>
+        <div class="small">Tue–Sat · 9am–7pm</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Skin fades <span class="dot">●</span> Hot towel shaves <span class="dot">●</span> Beard sculpts <span class="dot">●</span> Fathers &amp; sons <span class="dot">●</span> Wedding grooming <span class="dot">●</span></span>
+    <span>Skin fades <span class="dot">●</span> Hot towel shaves <span class="dot">●</span> Beard sculpts <span class="dot">●</span> Fathers &amp; sons <span class="dot">●</span> Wedding grooming <span class="dot">●</span></span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-head">
+    <div>
+      <div class="section-label">— What we do</div>
+      <h2>Services &amp; <em>pricing</em></h2>
+    </div>
+    <p>Every cut is finished with a hot towel and a splash of bay rum. No appointment? Walk-ins are always welcome — though booking saves you the wait.</p>
+  </div>
+
+  <div class="service-grid">
+    <div class="service">
+      <div class="service-num">01</div>
+      <div>
+        <h3>Signature Cut</h3>
+        <p>Consultation, scissor or clipper cut, hot towel, styling. The classic.</p>
+        <div class="service-meta">45 min</div>
+      </div>
+      <div class="service-price">£28</div>
+    </div>
+
+    <div class="service">
+      <div class="service-num">02</div>
+      <div>
+        <h3>Skin Fade</h3>
+        <p>Razor-sharp gradient, blended down to the skin. Finished with line-up.</p>
+        <div class="service-meta">45 min</div>
+      </div>
+      <div class="service-price">£32</div>
+    </div>
+
+    <div class="service">
+      <div class="service-num">03</div>
+      <div>
+        <h3>Cut &amp; Beard</h3>
+        <p>Full haircut paired with beard trim, line-up and hot towel finish.</p>
+        <div class="service-meta">60 min</div>
+      </div>
+      <div class="service-price">£40</div>
+    </div>
+
+    <div class="service">
+      <div class="service-num">04</div>
+      <div>
+        <h3>Hot Towel Shave</h3>
+        <p>Traditional cut-throat shave, three towels, pre &amp; post-shave oils.</p>
+        <div class="service-meta">40 min</div>
+      </div>
+      <div class="service-price">£30</div>
+    </div>
+
+    <div class="service">
+      <div class="service-num">05</div>
+      <div>
+        <h3>Father &amp; Son</h3>
+        <p>Two cuts, side by side. Saturday memories, sorted.</p>
+        <div class="service-meta">60 min</div>
+      </div>
+      <div class="service-price">£42</div>
+    </div>
+
+    <div class="service">
+      <div class="service-num">06</div>
+      <div>
+        <h3>Wedding Package</h3>
+        <p>Pre-wedding consult, day-of cut &amp; shave at the chair or on-site.</p>
+        <div class="service-meta">90 min</div>
+      </div>
+      <div class="service-price">£85</div>
+    </div>
+  </div>
+</section>
+
+<!-- CRAFT -->
+<section class="craft" id="craft">
+  <div class="craft-inner">
+    <div class="craft-visual">
+      <svg class="scissors-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="140" r="22" stroke="#c9a96a" stroke-width="2" fill="none"/>
+        <circle cx="140" cy="140" r="22" stroke="#c9a96a" stroke-width="2" fill="none"/>
+        <path d="M 75 130 L 165 40" stroke="#c9a96a" stroke-width="3" stroke-linecap="round"/>
+        <path d="M 125 130 L 35 40" stroke="#c9a96a" stroke-width="3" stroke-linecap="round"/>
+        <path d="M 100 100 L 100 60" stroke="#c9a96a" stroke-width="2" stroke-dasharray="2 4"/>
+        <circle cx="100" cy="100" r="3" fill="#c9a96a"/>
+      </svg>
+    </div>
+    <div>
+      <div class="section-label">— The craft</div>
+      <h2>Eleven years.<br>One <em>obsession</em>.</h2>
+      <p class="body-text">Sharps started in a single chair on Wellington Street. No website, no fancy signage — just a barber who'd spent fifteen years learning his trade in London and wanted to bring something proper back to Slough.</p>
+      <p class="body-text">Three chairs later, we're still doing it the same way: slow, careful, considered. Every cut starts with a conversation. Every shave ends with a smile.</p>
+      <div class="stats">
+        <div>
+          <div class="stat-num">11</div>
+          <div class="stat-label">Years cutting</div>
+        </div>
+        <div>
+          <div class="stat-num">3</div>
+          <div class="stat-label">Master barbers</div>
+        </div>
+        <div>
+          <div class="stat-num">412</div>
+          <div class="stat-label">5-star reviews</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="section-head">
+    <div>
+      <div class="section-label">— Word of mouth</div>
+      <h2>What people <em>say</em></h2>
+    </div>
+    <p>Don't take our word for it — these are real reviews from real customers, pulled straight from Google.</p>
+  </div>
+
+  <div class="review-grid">
+    <div class="review">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Best barber in Slough, hands down. Been going for six years. Wouldn't trust anyone else with my head."</p>
+      <div class="review-author">
+        <strong>James M.</strong>
+        Regular since 2019
+      </div>
+    </div>
+    <div class="review">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Got my wedding cut here last summer. Came out looking sharp, felt like a king. Worth every penny."</p>
+      <div class="review-author">
+        <strong>Aaron P.</strong>
+        Wedding package
+      </div>
+    </div>
+    <div class="review">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Take my 7-year-old here for the father &amp; son. He actually looks forward to haircuts now. Magic."</p>
+      <div class="review-author">
+        <strong>Daniel R.</strong>
+        Father &amp; son regular
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK -->
+<section class="book" id="book">
+  <h2>Time for a <em>proper</em> trim?</h2>
+  <p>Book online in under a minute, or just pop in. We're on Wellington Street, two minutes from the train station.</p>
+  <a href="#" class="btn-primary" style="background: var(--gold); color: var(--bg);">Book your chair →</a>
+
+  <div class="book-info">
+    <div>
+      <div class="info-block-label">Find us</div>
+      <div class="info-block-text">142 Wellington Street<br>Slough, SL1 1XZ</div>
+    </div>
+    <div>
+      <div class="info-block-label">Hours</div>
+      <div class="info-block-text">Tue–Fri · 9am–7pm<br>Saturday · 8am–6pm</div>
+    </div>
+    <div>
+      <div class="info-block-label">Get in touch</div>
+      <div class="info-block-text">01753 555 0142<br>hello@sharpsbarbers.co.uk</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo">
+        <div class="logo-mark">S</div>
+        Sharps <em class="serif" style="font-style: italic; color: var(--gold); font-weight: 400;">&amp; Co.</em>
+      </div>
+      <p>Traditional barbering for the modern man. Slough's most-booked chair, four years running.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Visit</h4>
+      <ul>
+        <li>Wellington Street</li>
+        <li>Slough, SL1 1XZ</li>
+        <li>01753 555 0142</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Hours</h4>
+      <ul>
+        <li>Mon · Closed</li>
+        <li>Tue–Fri · 9–7</li>
+        <li>Sat · 8–6</li>
+        <li>Sun · 10–4</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Follow</h4>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Google</a></li>
+        <li><a href="#">TikTok</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 Sharps &amp; Co. Barbers</div>
+    <div>Built with care in Slough</div>
+  </div>
+</footer>
+
+<script>
+  // scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
